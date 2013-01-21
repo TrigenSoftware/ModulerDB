@@ -6,7 +6,6 @@ Convenient operation and access to MySQL database.
 Methods
 =========
 
-Methods:
     $db = new ModulerDB(array(
         'host' => 'localhost',
         'username' => 'user_name',
