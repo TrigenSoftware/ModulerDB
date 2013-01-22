@@ -1,7 +1,7 @@
 <?php
 /*
 
-ModulerDB. Convenient operation and access to MySQL database.
+ModulerDB 1.01. Convenient operation and access to MySQL database.
 Copyright (C) 2012 TrigenSoftware
 
 This program is free software: you can redistribute it and/or modify
@@ -68,7 +68,8 @@ Methods:
                          select('username=','namu','or username=','name',arrayModel)
                          select(array('username=','namu','or username=','name'),arrayModel)
  
-    bool $db['table199']->create() - creates new table with name 'table199';
+    bool $db['table199']->create('id int, data varchar(100)') - creates new table with name 'table199';
+                        ->create(array('id' => 'int', 'data' => 'varchar(100)'))
 
     bool $db['table1']->add(array('email' => 'varchar(50)')) - add a columns;
     bool $db['table1']->addAfter(array('email' => 'varchar(50)'),'username') - add a columns after another column;
@@ -179,6 +180,14 @@ Methods:
     
     function create($cols){     
         if($this->tableisexist($this->table)) return false;
+        if(is_array($cols)){
+           $tcols = $cols;
+           $cols = '';
+           foreach($tcols as $vname => $vtype){
+              $cols .= $vname." ".$vtype.", ";
+           }
+           $cols = substr($cols,0,strlen($cols)-2);
+        }      
         $this->dbq("create table ".$this->table." (".$cols.")");
         $this->tables[$this->table] = new mdbTable($this->table,&$this->tables,$this->dbconf);
         

@@ -1,4 +1,4 @@
-ModulerDB
+ModulerDB 1.01
 =========
 
 Convenient operation and access to MySQL database.
@@ -56,7 +56,8 @@ Methods
                          select('username=','namu','or username=','name',arrayModel)
                          select(array('username=','namu','or username=','name'),arrayModel)
  
-    bool $db['table199']->create() - creates new table with name 'table199';
+    bool $db['table199']->create('id int, data varchar(100)') - creates new table with name 'table199';
+                        ->create(array('id' => 'int', 'data' => 'varchar(100)'))
 
     bool $db['table1']->add(array('email' => 'varchar(50)')) - add a columns;
     bool $db['table1']->addAfter(array('email' => 'varchar(50)'),'username') - add a columns after another column;
